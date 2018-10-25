@@ -29,8 +29,18 @@ class Application
     end
   end
 
-  def cart
+  def cart(in)
+    resp = Rack::Response.new
+    req = Rack::Request.new(in)
 
+      if req.path.match(/cart/)
+        @@cart.each do |item|
+        resp.write "#{item}\n"
+      end
+    else
+      resp.write "Path Not Found"
+    end
+    resp.finish
   end
 
 
