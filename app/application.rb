@@ -17,11 +17,19 @@ class Application
 
     elsif req.path.match(/cart/) && @@cart.empty?
           resp.write "Your cart is empty"
-    elsif  req.path.match(/cart/) && !@@cart.empty?
-        @@cart.each do |item|
-            resp.write "#{item}\n"
+    elsif  req.path.match(/cart/)
+        @@items.each do |item|
+            @@cart.push(item)
         end
-  else
+    elsif req.path.match(/add/) && @@cart.empty?
+            resp.write "Your cart is empty"
+    elsif  req.path.match(/cart/) && !@@cart.empty?
+          @@cart.each do |item|
+              resp.write "#{item}\n"
+          end
+
+
+    else
       resp.write "Path Not Found"
     end
 
